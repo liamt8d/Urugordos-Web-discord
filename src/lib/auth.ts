@@ -3,7 +3,7 @@ import crypto from 'crypto'
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123'
 const CLIENT_ID = process.env.DISCORD_CLIENT_ID || ''
 const CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET || ''
-const REDIRECT_URI = process.env.DISCORD_REDIRECT_URI || `${process.env.SITE_URL || 'http://localhost:4321'}/api/auth/discord/callback`
+const REDIRECT_URI = process.env.DISCORD_REDIRECT_URI || 'https://urugordos.com/api/auth/discord/callback'
 const GUILD_ID = process.env.GUILD_ID || ''
 const ADMIN_ROLE_IDS = (process.env.ADMIN_ROLE_IDS || '').split(',').filter(Boolean)
 

@@ -46,7 +46,7 @@ export async function POST(request: Request) {
           { name: '📅 Fecha', value: new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires' }), inline: true },
           { name: '📝 Motivo', value: motivoSancion, inline: false },
           { name: '💬 Justificación', value: justificacion, inline: false },
-          { name: '🔗 Admin', value: `[Ver apelación →](${process.env.SITE_URL || ''}/admin/apelaciones)`, inline: false },
+          { name: '🔗 Admin', value: `[Ver apelación →](https://urugordos.com/admin/apelaciones)`, inline: false },
         ],
         timestamp: new Date().toISOString(),
       }

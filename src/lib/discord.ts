@@ -95,7 +95,7 @@ export async function enviarPostulacionACanal(
     { name: '📋 Tipo', value: `${TIPO_EMOJI[tipo] || '📋'} ${TIPO_NOMBRE[tipo] || tipo}`, inline: true },
     { name: '📅 Fecha', value: new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires' }), inline: true },
     { name: '📝 Respuestas', value: respuestas.map((r, i) => `**${i + 1}.** ${r.pregunta}\n> ${r.respuesta || 'Sin respuesta'}`).join('\n').slice(0, 1024), inline: false },
-    { name: '🔗 Admin', value: `[Ver en web →](${process.env.SITE_URL || 'http://localhost:4321'}/admin/postulaciones)`, inline: false },
+    { name: '🔗 Admin', value: `[Ver en web →](https://urugordos.com/admin/postulaciones)`, inline: false },
   ]
 
   const data = await request('POST', `/channels/${NOTIF_CHANNEL}/messages`, {
