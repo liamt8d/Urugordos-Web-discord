@@ -38,13 +38,13 @@ export async function GET(request: NextRequest) {
 
     const response = NextResponse.redirect(new URL(`${BASE_URL}/admin`))
     response.cookies.set('discord_token', tokens.access_token, {
-      httpOnly: true,
+      httpOnly: false,
       secure: true,
       sameSite: 'lax',
       maxAge: 60 * 60 * 24,
     })
     response.cookies.set('discord_refresh', tokens.refresh_token, {
-      httpOnly: true,
+      httpOnly: false,
       secure: true,
       sameSite: 'lax',
       maxAge: 60 * 60 * 24 * 30,
