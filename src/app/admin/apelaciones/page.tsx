@@ -48,7 +48,9 @@ export default function AdminApelacionesPage() {
   const [loading, setLoading] = useState(true)
   const [filtro, setFiltro] = useState('')
 
-  const token = getCookie('discord_token')
+  const discordToken = getCookie('discord_token')
+  const sessionToken = typeof window !== 'undefined' ? sessionStorage.getItem('admin_token') : null
+  const token = discordToken || sessionToken
 
   const cargarApelaciones = useCallback(async (estado = '') => {
     setLoading(true)
@@ -101,6 +103,7 @@ export default function AdminApelacionesPage() {
 
   const cerrarSesion = async (e: React.MouseEvent) => {
     e.preventDefault()
+    sessionStorage.removeItem('admin_token')
     await fetch('/api/auth/logout', { method: 'POST' })
     router.push('/admin/login')
   }

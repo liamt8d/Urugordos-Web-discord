@@ -27,8 +27,9 @@ export default function AdminPage() {
   const [authed, setAuthed] = useState(false)
 
   useEffect(() => {
-    const token = document.cookie.includes('discord_token=')
-    if (!token) {
+    const hasCookie = document.cookie.includes('discord_token=')
+    const hasToken = sessionStorage.getItem('admin_token')
+    if (!hasCookie && !hasToken) {
       router.replace('/admin/login')
     } else {
       setAuthed(true)
@@ -37,6 +38,7 @@ export default function AdminPage() {
 
   const cerrarSesion = async (e: React.MouseEvent) => {
     e.preventDefault()
+    sessionStorage.removeItem('admin_token')
     await fetch('/api/auth/logout', { method: 'POST' })
     router.push('/admin/login')
   }
