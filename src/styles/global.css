@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap');
+
+.radial-gradient-container {
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.circle {
+  position: absolute;
+  inset: 0;
+  opacity: 0.7;
+}
+
+.circle-1 { background: radial-gradient(circle 200px at 70% 40%, #b06040, transparent); }
+.circle-2 { background: radial-gradient(circle 200px at 80% 40%, #b06040, transparent); }
+.circle-3 { background: radial-gradient(circle 200px at 75% 50%, #400000, transparent); }
+.circle-4 { background: radial-gradient(circle 150px at 25% 65%, #b06040, transparent); }
+.circle-5 { background: radial-gradient(circle 200px at 39% 77%, #b06040, transparent); }
+.circle-6 { background: radial-gradient(circle 100px at 15% 65%, #b06040, transparent); }
+
+html {
+  font-family: 'Onest', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #000;
+  color-scheme: dark;
+  overflow-x: hidden;
+  color: #fff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background: #000;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #b06040;
+}
+
+.icon-img {
+  animation: moveicon 3s infinite ease-in-out;
+}
+
+@keyframes moveicon {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
