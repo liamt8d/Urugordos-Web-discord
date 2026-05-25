@@ -12,6 +12,8 @@ function LoginErrorHandler({ children }: { children: React.ReactNode }) {
 function LoginContent() {
   const searchParams = useSearchParams()
   const [error, setError] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const errorCode = searchParams.get('error')
   useEffect(() => {
@@ -24,6 +26,31 @@ function LoginContent() {
       if (errorParam) setError('Error: ' + errorParam)
     }
   }, [errorCode])
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError('')
+    setLoading(true)
+
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      })
+      const data = await res.json()
+      if (res.ok && data.token) {
+        sessionStorage.setItem('admin_token', data.token)
+        window.location.href = '/admin'
+      } else {
+        setError(data.error || 'Contraseña incorrecta')
+      }
+    } catch {
+      setError('Error de conexión')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <section className="login-card">
@@ -46,16 +73,18 @@ function LoginContent() {
           <span>o</span>
         </div>
 
-        <form action="/api/admin/login" method="POST" className="login-form">
+        <form onSubmit={handleSubmit} className="login-form">
           <input
             type="password"
-            name="password"
-            placeholder="Contraseña (legacy)"
+            placeholder="Contraseña"
             className="login-input"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
+            required
           />
-          <button type="submit" className="login-btn">
-            Ingresar →
+          <button type="submit" className="login-btn" disabled={loading}>
+            {loading ? '⏳ Verificando...' : 'Ingresar →'}
           </button>
         </form>
       </div>

@@ -53,12 +53,21 @@ export interface GuildMember {
 }
 
 export async function getUserGuildMember(accessToken: string): Promise<GuildMember | null> {
-  if (!GUILD_ID) return null
+  if (!GUILD_ID) {
+    console.error('[Discord] GUILD_ID not set')
+    return null
+  }
   const res = await fetch(`https://discord.com/api/v10/users/@me/guilds/${GUILD_ID}/member`, {
     headers: { Authorization: `Bearer ${accessToken}` },
   })
-  if (!res.ok) return null
-  return res.json()
+  if (!res.ok) {
+    const text = await res.text()
+    console.error(`[Discord] Member endpoint error: ${res.status} ${text}`)
+    return null
+  }
+  const data = await res.json()
+  console.log('[Discord] Member data:', JSON.stringify(data))
+  return data
 }
 
 export function getAdminRoles(): string[] {
