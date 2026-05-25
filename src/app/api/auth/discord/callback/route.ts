@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
     }
 
     const adminRoles = getAdminRoles()
-    const isAdmin = adminRoles.length === 0 || adminRoles.some(roleId => member.roles.includes(roleId))
+    const isAdmin = adminRoles.length > 0 && adminRoles.some(roleId => member.roles.includes(roleId))
     
     if (!isAdmin) {
       return NextResponse.redirect(new URL(`${BASE_URL}/admin/login?error=not_admin`))
